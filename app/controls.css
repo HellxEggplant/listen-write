@@ -50,6 +50,95 @@
   bottom: 54px;
 }
 
+.baidu-connect {
+  margin-top: 15px;
+  text-decoration: none;
+}
+
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: 9px;
+  padding: 9px 14px;
+  border: 1px solid #dbe3f3;
+  border-radius: 8px;
+  background: #f7f9fd;
+  color: #52627c;
+  font-size: 13px;
+}
+
+.baidu-browser {
+  margin-top: 13px;
+  border: 1px solid #e1e6ef;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+}
+
+.baidu-path {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px;
+  border-bottom: 1px solid #e8ecf3;
+  background: #f8faff;
+}
+
+.baidu-path button {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: #305ae8;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.baidu-path span {
+  min-width: 0;
+  overflow: hidden;
+  color: #738198;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.baidu-files {
+  max-height: 290px;
+  overflow: auto;
+  padding: 5px;
+}
+
+.baidu-file {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 7px;
+  color: #52627c;
+  text-align: left;
+}
+
+.baidu-file:hover {
+  background: #eef3ff;
+  color: #305ae8;
+}
+
+.baidu-file span {
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.baidu-file small {
+  color: #8793a7;
+  font-size: 11px;
+}
+
 @media (max-width: 750px) {
   .practice-top { align-items: flex-start; }
   .view-switches { gap: 7px; }
