@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent } from 'react';
 import './controls.css';
+import './studio.css';
 import { Headphones, Upload, Link2, Play, Pause, RotateCcw, ChevronLeft, ChevronRight, Check, FileText, ArrowUpRight, Cloud, Folder, Film, AudioLines, Volume2, VolumeX, Maximize2, SlidersHorizontal } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
@@ -81,7 +82,7 @@ export default function Home() {
  async function toggleFullscreen(){if(!stage.current)return;if(document.fullscreenElement)await document.exitFullscreen();else await stage.current.requestFullscreen();}
  return <main>
  <header className="topbar"><a className="brand" href="/"><span className="brand-icon"><Headphones size={23}/></span>听句 <span className="brand-en">Listen, then write.</span></a><span className="private-label">你的英语听写练习室</span></header>
- <div className="workspace"><section className="intro"><div><div className="eyebrow">LISTENING STUDIO</div><h1>听清一句，写下一句。</h1><p>每句两遍，把听懂变成真正掌握。</p></div><span className="step-pill">01 导入素材 <span>—</span> 02 逐句听写</span></section>
+ <div className="workspace"><section className="intro"><div><div className="eyebrow">LISTENING STUDIO</div><h1>听清一句，写下一句。</h1></div><span className="step-pill">01 素材 <span>/</span> 02 听写 <span>/</span> 03 句子</span></section>
  <div className="columns"><aside className="import-panel"><div className="panel-heading"><span className="number">01</span><h2>导入听力素材</h2></div>
  <Tabs defaultValue={new URLSearchParams(typeof window==='undefined'?'':window.location.search).get('baidu')==='connected'?'baidu':'file'}>
   <TabsList className="w-full"><TabsTrigger value="file"><Upload/>本地</TabsTrigger><TabsTrigger value="url"><Link2/>链接</TabsTrigger><TabsTrigger value="baidu"><Cloud/>网盘</TabsTrigger></TabsList>

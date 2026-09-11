@@ -1,0 +1,118 @@
+/* Listening studio: quiet chrome, a dark viewing surface and clear blue actions. */
+:root { --background:#f2f4f7; --foreground:#202b3c; --primary:#305ae8; --border:#dfe5ed; --muted:#edf1f6; --muted-foreground:#627086; }
+body { font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif; }
+main .topbar { height:72px; padding:0 32px; background:#fff; border-bottom:1px solid #e2e6ed; }
+main .brand { font-size:22px; gap:10px; letter-spacing:-.5px; }
+main .brand-icon { width:36px; height:36px; border-radius:11px; background:#223b73; }
+main .brand-en { font-size:13px; letter-spacing:0; border:0; margin:0; padding-left:12px; color:#7b8797; }
+main .private-label { font-size:13px; color:#68768a; }
+main .workspace { max-width:1720px; padding:26px 32px 20px; }
+main .intro { margin-bottom:24px; }
+main .intro .eyebrow { font-size:11px; letter-spacing:2.2px; margin-bottom:6px; color:#718096; }
+main h1 { font-size:26px; font-weight:650; letter-spacing:-.7px; }
+main .step-pill { background:transparent; padding:0; font-size:13px; color:#65738a; }
+main .step-pill span { color:#bcc5d1; padding:0 15px; }
+main .columns { grid-template-columns:272px minmax(0,1fr); gap:20px; }
+main .import-panel, main .practice { border:1px solid #e0e5ed; border-radius:16px; box-shadow:0 3px 14px #22345204; }
+main .import-panel { padding:22px 18px; }
+main .panel-heading { gap:10px; margin-bottom:22px; }
+main h2 { font-size:16px; font-weight:650; }
+main .number { color:#6d7b90; background:#f0f3f7; border:1px solid #e7ebf1; border-radius:7px; width:28px; height:28px; font-size:12px; font-variant-numeric:tabular-nums; }
+main .import-panel [role=tablist] { padding:4px; height:42px; border-radius:9px; background:#f0f3f7; }
+main .import-panel [role=tab] { font-size:14px; border-radius:6px; gap:6px; }
+main .import-panel [role=tab][data-state=active] { background:#fff; color:#244fcf; box-shadow:0 2px 4px #25334b0b; }
+main .drop-area { margin-top:18px; padding:28px 12px; min-height:160px; justify-content:center; border-color:#cbd5e5; background:#fafbfe; border-radius:11px; gap:11px; }
+main .drop-area:hover { background:#f0f5ff; border-color:#688bef; }
+main .drop-area > svg { color:#5273bc; }
+main .drop-area strong { font-size:15px; }
+main .drop-area span { font-size:12px; }
+main .subtitle-upload { padding:13px 11px; border-radius:9px; gap:9px; color:#536b95; }
+main .note { font-size:12px; line-height:1.75; color:#758299; }
+main .recognize-card { margin-top:20px; border-radius:11px; background:#f7f9fc; padding:14px; }
+main .recognize-card p, main .baidu-note p { font-size:12px; line-height:1.8; color:#718096; }
+main .secondary { min-height:42px; border-radius:8px; font-size:14px; }
+main .baidu-note { margin-top:20px; padding:16px 0 0; border-bottom:0; border-top:1px solid #e8ecf2; }
+main .media-load-card { border-radius:10px; }
+main .practice { display:grid; grid-template-columns:minmax(0,1fr) 290px; align-items:start; overflow:visible; }
+main .practice-top { grid-column:1; padding:20px 22px 18px; gap:12px; }
+main .practice-title { gap:10px; }
+main .practice-title .number { width:30px; height:30px; font-size:12px; border-radius:7px; }
+main .practice-divider { min-height:30px; background:#e8ecf2; }
+main .practice-top .eyebrow { font-size:10px; letter-spacing:1.5px; margin-bottom:5px; color:#8491a5; }
+main .practice-top h2 { font-size:17px; line-height:1.5; }
+main .practice-material-status { background:#f3f5f9; border:1px solid #e6ebf2; border-radius:6px; padding:5px 8px; font-size:12px; color:#748197; }
+main .video-stage { grid-column:1; margin:0 22px; aspect-ratio:16/9; border-radius:11px; background:linear-gradient(145deg,#202c40,#101927); box-shadow:inset 0 0 0 1px #ffffff08; }
+main .video-stage video { object-fit:contain; max-height:none; }
+main .video-empty > svg { color:#a5b7d8; width:34px; height:34px; margin-bottom:18px; }
+main .video-empty h3 { font-size:21px; letter-spacing:.5px; color:#edf2fa; }
+main .video-empty p { font-size:13px; color:#9baac0; }
+main .sentence-quickbar { grid-column:1; margin:0 22px; padding:16px 0; gap:12px; flex-wrap:wrap; border-bottom:1px solid #e9edf3; }
+main .sentence-quick-actions { gap:7px; }
+main .listen-sentence { min-height:40px; border-radius:8px; padding:9px 15px; font-size:14px; background:#305ae8; box-shadow:0 3px 8px #305ae815; }
+main .sentence-nav { width:28px; min-height:36px; }
+main .sentence-quick-settings { margin-left:0; gap:7px; flex-wrap:wrap; }
+main .mask-dialog-trigger, main .switch-control { font-size:14px; background:#fff; border-color:#e1e7f0; padding:7px 9px; border-radius:7px; gap:6px; }
+main .mask-dialog-trigger > span { font-size:12px; background:#edf2fd; color:#4566b0; }
+main .mask-dialog-trigger:hover { background:#f2f6fd; }
+main .writing { grid-column:1; padding:18px 22px 10px; }
+main .writing textarea { min-height:112px; font-size:17px; padding:16px; border-radius:10px; background:#fcfdff; border-color:#dfe5ef; }
+main .writing-actions { margin-top:12px; }
+main .writing-actions > span { font-size:12px; }
+main .primary { min-height:40px; font-size:14px; border-radius:8px; padding:9px 15px; }
+main .status:empty { display:none; }
+main .status { font-size:14px; margin:12px 0; }
+main .practice-sentence-section { grid-column:2; grid-row:1 / span 4; align-self:stretch; min-width:0; padding:22px 16px; margin:0; border-top:0; border-left:1px solid #e5eaf1; background:#fbfcfe; border-radius:0 16px 0 0; }
+main .practice-sentence-heading { align-items:stretch; flex-direction:column; gap:18px; margin-bottom:18px; }
+main .sentence-list-tools { justify-content:space-between; gap:6px; }
+main .language-toggle { padding:3px; border:0; background:#ecf0f5; border-radius:8px; }
+main .language-toggle button { font-size:14px; min-height:32px; padding:5px 9px; }
+main .practice-sentence-list { max-height:620px; scrollbar-width:thin; scrollbar-color:#cdd5e3 transparent; }
+main .practice-sentence-list .sentence-item { align-items:flex-start; gap:9px; padding:14px 10px; margin:0 0 7px; border-radius:9px; border:1px solid transparent; }
+main .practice-sentence-list .sentence-item.selected { background:#eaf0ff; border-color:#c5d4ff; box-shadow:inset 3px 0 #305ae8; }
+main .practice-sentence-list .sentence-item strong { font-size:16px; line-height:1.7; font-weight:450; }
+main .sentence-index { font-size:12px; margin-top:5px; color:#8693a7; font-variant-numeric:tabular-nums; }
+main .duration { display:none; }
+main .sentence-item small { font-size:12px; color:#8390a5; }
+main .empty-list { padding:36px 14px; font-size:14px; line-height:1.9; text-align:center; border:1px dashed #dfe5ee; border-radius:10px; color:#8490a3; }
+main .progress-footer { grid-column:1 / -1; border-radius:0 0 16px 16px; background:#fafbfd; padding:16px 22px; gap:18px; }
+main .progress-footer > span { font-size:12px; }
+main .progress-footer > div { max-width:180px; }
+main .bottom-note { font-size:12px; padding-top:20px; color:#8995a7; letter-spacing:2px; }
+.mask-dialog { border-radius:16px; border-color:#e2e7ef; box-shadow:0 24px 80px #15243a24; }
+.mask-dialog [data-slot=dialog-title] { font-size:20px; letter-spacing:-.4px; }
+.mask-dialog [data-slot=dialog-description] { font-size:14px; line-height:1.8; }
+.mask-dialog label > span, .writing-settings-grid label > span { font-size:14px; }
+.dialog-primary, .dialog-secondary { min-height:40px; border-radius:8px; font-size:14px; }
+.word-card { border-radius:14px; box-shadow:0 16px 48px #182a4c26; }
+.word-card-definition { font-size:14px; }
+main .video-writing-footer { flex-wrap:wrap; }
+@media(min-width:1500px) { main .practice { grid-template-columns:minmax(0,1fr) 320px; } }
+@media(max-width:1200px) {
+  main .workspace { padding:24px; }
+  main .columns { grid-template-columns:250px minmax(0,1fr); gap:16px; }
+  main .practice { grid-template-columns:minmax(0,1fr); }
+  main .practice-sentence-section { grid-column:1; grid-row:auto; border-left:0; border-top:1px solid #e5eaf1; border-radius:0; }
+  main .practice-sentence-heading { flex-direction:row; align-items:center; }
+  main .practice-sentence-list { max-height:320px; }
+}
+@media(max-width:750px) {
+  main .topbar { height:62px; padding:0 18px; }
+  main .workspace { padding:20px 14px; }
+  main .intro { margin-bottom:18px; }
+  main h1 { font-size:23px; }
+  main .columns { grid-template-columns:minmax(0,1fr); gap:16px; }
+  main .import-panel { padding:18px; }
+  main .drop-area { min-height:125px; padding:18px; }
+  main .practice-top { padding:18px 14px; }
+  main .practice-top h2 { font-size:15px; }
+  main .video-stage { margin:0 14px; }
+  main .sentence-quickbar { margin:0 14px; }
+  main .sentence-quick-settings { width:100%; }
+  main .writing { padding:16px 14px; }
+  main .practice-sentence-heading { flex-wrap:wrap; }
+  main .practice-sentence-section { padding:18px 14px; }
+  main .progress-footer { padding:15px 14px; flex-wrap:wrap; }
+  main .video-empty h3 { font-size:18px; }
+  main .video-empty p { font-size:12px; }
+  main .video-empty > svg { margin-bottom:10px; }
+}
