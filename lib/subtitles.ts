@@ -1,4 +1,45 @@
 export type Sentence = { start: number; end: number; text: string };
+export type TimedTranscriptChunk = Sentence;
+const endsSentence = (text: string) => /[.!?]["”')\]]*$/.test(text.trim());
+
+function splitTimedChunk(chunk: TimedTranscriptChunk): TimedTranscriptChunk[] {
+  const parts = chunk.text.match(/[^.!?]+(?:[.!?]+["”')\]]*)?|[.!?]+/g)?.map(part => part.trim()).filter(Boolean) || [];
+  if (parts.length <= 1) return [{ ...chunk, text: chunk.text.trim() }];
+  const totalWeight = parts.reduce((sum, part) => sum + Math.max(1, part.replace(/\s/g, '').length), 0);
+  const duration = Math.max(0, chunk.end - chunk.start);
+  let elapsedWeight = 0;
+  return parts.map((text, index) => {
+    const start = chunk.start + duration * elapsedWeight / totalWeight;
+    elapsedWeight += Math.max(1, text.replace(/\s/g, '').length);
+    const end = index === parts.length - 1 ? chunk.end : chunk.start + duration * elapsedWeight / totalWeight;
+    return { start, end, text };
+  });
+}
+
+export function mergeTranscriptChunks(chunks: TimedTranscriptChunk[], maxDuration = 15): Sentence[] {
+  const pieces = chunks
+    .filter(chunk => chunk.text.trim() && Number.isFinite(chunk.start) && Number.isFinite(chunk.end) && chunk.end > chunk.start)
+    .sort((a, b) => a.start - b.start)
+    .flatMap(splitTimedChunk);
+  const result: Sentence[] = [];
+  let current: Sentence | undefined;
+  const flush = () => {
+    if (!current) return;
+    result.push({ ...current, text: current.text.replace(/\s+/g, ' ').trim() });
+    current = undefined;
+  };
+  for (const piece of pieces) {
+    const gap = current ? piece.start - current.end : 0;
+    if (current && (gap > 1.5 || current.end - current.start >= maxDuration)) flush();
+    current = current
+      ? { start: current.start, end: Math.max(current.end, piece.end), text: `${current.text} ${piece.text}` }
+      : { ...piece };
+    if (endsSentence(current.text) || current.end - current.start >= maxDuration) flush();
+  }
+  flush();
+  return result;
+}
+
 const seconds = (s: string) => s.replace(',', '.').split(':').reduce((n, p) => n * 60 + Number(p), 0);
 export function parseSubtitles(input: string): Sentence[] {
   const cues: Sentence[] = [];
@@ -18,7 +59,7 @@ export function parseSubtitles(input: string): Sentence[] {
   for (const cue of cues) {
     if (current && cue.start-current.end > 1.5) { result.push(current); current=undefined; }
     current = current ? { start: current.start, end: Math.max(current.end,cue.end), text: current.text+' '+cue.text } : {...cue};
-    if (/[.!?]["”')\]]*$/.test(current.text)) {result.push(current);current=undefined;}
+    if (endsSentence(current.text)) {result.push(current);current=undefined;}
   }
   if(current) result.push(current);
   return result;

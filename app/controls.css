@@ -419,8 +419,12 @@
 .video-writing-overlay {
   position: absolute;
   z-index: 5;
-  right: 5%;
-  left: 5%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  max-width: 94%;
+  max-height: 56%;
+  transform: translate(-50%, -50%);
   padding: 9px 11px 8px;
   border: 1px solid rgb(255 255 255 / 55%);
   border-radius: 10px;
@@ -431,9 +435,9 @@
 
 .video-writing-overlay textarea {
   display: block;
+  flex: 1;
   width: 100%;
-  min-height: 54px;
-  max-height: 82px;
+  min-height: 0;
   resize: none;
   border: 0;
   background: transparent;
@@ -467,6 +471,7 @@
 }
 
 .move-writing-button,
+.writing-settings-trigger,
 .overlay-check-button,
 .overlay-return-button {
   min-height: 30px;
@@ -476,10 +481,58 @@
 }
 
 .move-writing-button,
+.writing-settings-trigger,
 .overlay-return-button {
   border: 1px solid #ccd6e8;
   background: rgb(255 255 255 / 55%);
   color: #596981;
+}
+
+.writing-settings-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.writing-settings-grid {
+  display: grid;
+  gap: 18px;
+  padding: 8px 0;
+}
+
+.writing-settings-grid > label {
+  display: grid;
+  gap: 9px;
+}
+
+.writing-settings-grid label > span {
+  display: flex;
+  justify-content: space-between;
+  color: #53647e;
+  font-size: 13px;
+}
+
+.writing-settings-grid label b {
+  color: #305ae8;
+}
+
+.writing-color-control {
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+}
+
+.writing-color-control input {
+  width: 48px;
+  height: 34px;
+  padding: 2px;
+  border: 1px solid #d7dfed;
+  border-radius: 7px;
+  background: white;
+}
+
+.writing-color-control > b {
+  color: #6f7c90 !important;
+  font-size: 12px;
 }
 
 .overlay-check-button {
@@ -998,11 +1051,13 @@
   .mask-dialog-trigger { padding: 6px 8px; font-size: 12px; }
   .sentence-settings-grid { grid-template-columns: 1fr; }
   .subtitle-overlay { bottom: 58px; font-size: 15px; }
-  .video-writing-overlay { right: 3%; bottom: 100px !important; left: 3%; padding: 7px 9px 6px; }
-  .video-writing-overlay textarea { min-height: 38px; max-height: 52px; font-size: 14px; }
+  .video-writing-overlay { max-width: 94%; max-height: 52%; padding: 7px 9px 6px; }
+  .video-writing-overlay textarea { min-height: 0; font-size: 14px; }
   .video-writing-footer { gap: 6px; }
   .move-writing-button { font-size: 0; }
   .move-writing-button::after { content: '下移'; font-size: 11px; }
+  .writing-settings-trigger { font-size: 0; }
+  .writing-settings-trigger svg { width: 15px; height: 15px; }
   .overlay-opacity-slider { width: 72px !important; }
   .control-grid { grid-template-columns: 1fr 1fr; padding: 0 16px 18px; }
   .subtitle-mask { left: 2%; width: 96%; }
