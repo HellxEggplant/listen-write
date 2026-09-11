@@ -16,7 +16,7 @@ self.onmessage = async (event: MessageEvent<{ audio: Float32Array }>) => {
       });
     }
     self.postMessage({ type: 'status', message: '正在识别并生成时间轴…' });
-    const result = await transcriber(event.data.audio, { language: 'en', task: 'transcribe', return_timestamps: true, chunk_length_s: 30, stride_length_s: 5 });
+    const result = await transcriber(event.data.audio, { return_timestamps: true, chunk_length_s: 30, stride_length_s: 5 });
     self.postMessage({ type: 'result', result });
   } catch (error) {
     self.postMessage({ type: 'error', message: error instanceof Error ? error.message : '本地字幕识别失败' });
