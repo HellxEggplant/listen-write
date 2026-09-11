@@ -102,6 +102,34 @@
 .dialog-primary { background: #305ae8; color: white; }
 .dialog-secondary { border: 1px solid #dbe3f3; background: white; color: #5b6c86; }
 
+.sentence-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sentence-settings-grid label {
+  display: grid;
+  gap: 8px;
+  color: #596981;
+  font-size: 13px;
+}
+
+.sentence-settings-grid [data-slot="select-trigger"],
+.sentence-settings-grid input {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid #dbe3f3;
+  border-radius: 8px;
+  background: white;
+}
+
+.sentence-settings-grid input {
+  padding: 0 12px;
+  color: #30405c;
+  font-size: 14px;
+}
+
 .subtitle-overlay {
   position: absolute;
   z-index: 3;
@@ -222,6 +250,37 @@
 .compact-options label { min-width: 112px; }
 .compact-options [data-slot="select-trigger"] { min-height: 42px; background: white; }
 .compact-options .custom-repeat { min-width: 70px; }
+
+.sentence-quickbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 28px;
+  border-bottom: 1px solid #edf0f6;
+  background: #fbfcff;
+}
+
+.sentence-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.sentence-quick-status {
+  color: #68778f;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+@media (min-width: 751px) {
+  .practice-top { padding: 17px 24px; }
+  .video-stage { height: clamp(250px, 36vh, 360px); margin: 0 24px; aspect-ratio: auto; }
+  .video-stage video { max-height: none; }
+  .writing { padding: 17px 24px 4px; }
+  .writing-heading { margin-bottom: 11px; }
+  .writing textarea { min-height: 118px; padding: 15px 17px; }
+}
 .custom-repeat input {
   width: 70px;
   height: 42px;
@@ -556,11 +615,17 @@
   .practice-top { align-items: flex-start; }
   .view-switches { gap: 7px; }
   .switch-control { padding: 6px 8px; font-size: 12px; }
+  .mask-dialog-trigger { padding: 6px 8px; font-size: 12px; }
+  .sentence-settings-grid { grid-template-columns: 1fr; }
   .subtitle-overlay { bottom: 42px; font-size: 16px; }
   .control-grid { grid-template-columns: 1fr 1fr; padding: 0 16px 18px; }
   .subtitle-mask { left: 2%; width: 96%; }
   .web-player-controls { padding: 26px 10px 7px; }
   .volume-slider { display: none !important; }
+  .sentence-quickbar { align-items: flex-start; flex-direction: column; gap: 8px; padding: 12px 16px; }
+  .sentence-quick-actions { width: 100%; }
+  .listen-sentence { flex: 1; }
+  .sentence-quick-status { white-space: normal; }
   .sentence-toolbar { align-items: stretch; flex-direction: column; gap: 14px; padding: 16px; }
   .sentence-status { order: 3; text-align: left; }
   .compact-options { flex-wrap: wrap; }
