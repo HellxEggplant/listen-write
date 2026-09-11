@@ -267,6 +267,13 @@
   gap: 7px;
 }
 
+.sentence-quick-settings {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
 .sentence-quick-status {
   color: #68778f;
   font-size: 13px;
@@ -625,6 +632,7 @@
   .sentence-quickbar { align-items: flex-start; flex-direction: column; gap: 8px; padding: 12px 16px; }
   .sentence-quick-actions { width: 100%; }
   .listen-sentence { flex: 1; }
+  .sentence-quick-settings { width: 100%; margin-left: 0; flex-wrap: wrap; }
   .sentence-quick-status { white-space: normal; }
   .sentence-toolbar { align-items: stretch; flex-direction: column; gap: 14px; padding: 16px; }
   .sentence-status { order: 3; text-align: left; }
