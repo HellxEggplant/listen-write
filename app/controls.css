@@ -161,6 +161,43 @@
   background: #f7f9ff;
 }
 
+.media-load-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px 12px;
+  margin-top: 14px;
+  padding: 13px 14px;
+  border: 1px solid #dfe6f3;
+  border-radius: 10px;
+  background: #fbfcff;
+}
+
+.media-load-card > div {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.media-load-card span,
+.media-load-card small {
+  color: #748198;
+  font-size: 12px;
+}
+
+.media-load-card strong {
+  color: #3d5272;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.media-load-card [data-slot="progress"] {
+  height: 6px;
+}
+
 .recognize-card .secondary {
   gap: 8px;
   margin: 0;
