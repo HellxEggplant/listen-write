@@ -74,7 +74,7 @@ main .writing-actions > span { font-size:12px; }
 main .primary { min-height:40px; font-size:14px; border-radius:8px; padding:9px 15px; }
 main .status:empty { display:none; }
 main .status { font-size:14px; margin:12px 0; }
-main .practice-sentence-section { position:fixed; z-index:40; top:72px; right:0; bottom:0; width:min(400px,92vw); min-width:0; display:flex; flex-direction:column; padding:22px 18px; margin:0; border-top:0; border-left:1px solid #dfe5ee; background:#fbfcfe; border-radius:0; box-shadow:-18px 0 48px #18243a16; transform:translateX(102%); visibility:hidden; pointer-events:none; transition:transform .28s ease,visibility .28s; }
+main .practice-sentence-section { position:fixed; z-index:40; top:72px; left:0; right:auto; bottom:0; width:min(400px,92vw); min-width:0; display:flex; flex-direction:column; padding:22px 18px; margin:0; border-top:0; border-right:1px solid #dfe5ee; border-left:0; background:#fbfcfe; border-radius:0 15px 15px 0; box-shadow:18px 0 48px #18243a16; transform:translateX(-102%); visibility:hidden; pointer-events:none; transition:transform .28s ease,visibility .28s; }
 main.sentences-open .practice-sentence-section { transform:translateX(0); visibility:visible; pointer-events:auto; }
 main .practice-sentence-heading { align-items:stretch; flex-direction:column; gap:18px; margin-bottom:18px; }
 main .sentence-list-tools { justify-content:space-between; gap:6px; }
@@ -120,8 +120,8 @@ main .video-writing-footer { flex-wrap:wrap; }
   main .writing { padding:16px 14px; }
   main .floating-sentence-button { left:10px; width:44px; height:44px; border-radius:13px; }
   main .practice-sentence-heading { flex-wrap:wrap; }
-  main .practice-sentence-section { top:auto; left:0; width:100%; height:min(72vh,620px); padding:18px 14px; border-top:1px solid #dfe5ee; border-left:0; border-radius:15px 15px 0 0; box-shadow:0 -18px 48px #18243a1c; transform:translateY(102%); }
-  main.sentences-open .practice-sentence-section { transform:translateY(0); }
+  main .practice-sentence-section { top:62px; left:0; right:auto; bottom:0; width:min(400px,92vw); height:auto; padding:18px 14px; border-top:0; border-right:1px solid #dfe5ee; border-left:0; border-radius:0 15px 15px 0; box-shadow:18px 0 48px #18243a1c; transform:translateX(-102%); }
+  main.sentences-open .practice-sentence-section { transform:translateX(0); }
   main .progress-footer { padding:15px 14px; flex-wrap:wrap; }
   main .video-empty h3 { font-size:18px; }
   main .video-empty p { font-size:12px; }
