@@ -399,7 +399,7 @@
   position: absolute;
   z-index: 3;
   left: 50%;
-  bottom: 46px;
+  bottom: 76px;
   transform: translateX(-50%);
   max-width: min(84%, 760px);
   padding: 8px 13px;
@@ -410,6 +410,85 @@
   font-size: 18px;
   line-height: 1.55;
   text-shadow: 0 1px 2px #000;
+}
+
+.video-writing-overlay {
+  position: absolute;
+  z-index: 5;
+  right: 5%;
+  left: 5%;
+  padding: 9px 11px 8px;
+  border: 1px solid rgb(255 255 255 / 55%);
+  border-radius: 10px;
+  color: #263652;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 22%);
+  backdrop-filter: blur(7px);
+}
+
+.video-writing-overlay textarea {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  max-height: 82px;
+  resize: none;
+  border: 0;
+  background: transparent;
+  color: #1d2a3f;
+  font-size: 16px;
+  line-height: 1.55;
+  outline: 0;
+}
+
+.video-writing-overlay textarea::placeholder {
+  color: #6f7c90;
+}
+
+.video-writing-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgb(73 91 123 / 15%);
+  color: #65758e;
+  font-size: 11px;
+}
+
+.video-writing-footer > span,
+.video-writing-footer > b {
+  white-space: nowrap;
+}
+
+.overlay-opacity-slider {
+  width: min(130px, 20vw) !important;
+}
+
+.move-writing-button,
+.overlay-check-button,
+.overlay-return-button {
+  min-height: 30px;
+  padding: 5px 9px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.move-writing-button,
+.overlay-return-button {
+  border: 1px solid #ccd6e8;
+  background: rgb(255 255 255 / 55%);
+  color: #596981;
+}
+
+.overlay-check-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  background: #305ae8;
+  color: white;
+}
+
+.overlay-return-button {
+  flex: 0 0 auto;
 }
 
 .video-caption {
@@ -914,7 +993,13 @@
   .switch-control { padding: 6px 8px; font-size: 12px; }
   .mask-dialog-trigger { padding: 6px 8px; font-size: 12px; }
   .sentence-settings-grid { grid-template-columns: 1fr; }
-  .subtitle-overlay { bottom: 42px; font-size: 16px; }
+  .subtitle-overlay { bottom: 58px; font-size: 15px; }
+  .video-writing-overlay { right: 3%; bottom: 100px !important; left: 3%; padding: 7px 9px 6px; }
+  .video-writing-overlay textarea { min-height: 38px; max-height: 52px; font-size: 14px; }
+  .video-writing-footer { gap: 6px; }
+  .move-writing-button { font-size: 0; }
+  .move-writing-button::after { content: '下移'; font-size: 11px; }
+  .overlay-opacity-slider { width: 72px !important; }
   .control-grid { grid-template-columns: 1fr 1fr; padding: 0 16px 18px; }
   .subtitle-mask { left: 2%; width: 96%; }
   .video-stage { aspect-ratio: 16 / 9; }
