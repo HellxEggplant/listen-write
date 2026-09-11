@@ -24,3 +24,52 @@ export function parseSubtitles(input: string): Sentence[] {
   return result;
 }
 export function normalize(s: string) { return s.toLowerCase().replace(/[’]/g,"'").replace(/[^a-z0-9'\s]/g,'').trim().replace(/\s+/g,' '); }
+
+export type AnswerComparison = {
+  correct: boolean;
+  score: number;
+  missing: string[];
+  extra: string[];
+};
+
+export function compareAnswer(input: string, target: string): AnswerComparison {
+  const inputWords = normalize(input).split(' ').filter(Boolean);
+  const targetWords = normalize(target).split(' ').filter(Boolean);
+  const rows = targetWords.length + 1;
+  const columns = inputWords.length + 1;
+  const lcs = Array.from({ length: rows }, () => Array<number>(columns).fill(0));
+
+  for (let i = 1; i < rows; i++) {
+    for (let j = 1; j < columns; j++) {
+      lcs[i][j] = targetWords[i - 1] === inputWords[j - 1]
+        ? lcs[i - 1][j - 1] + 1
+        : Math.max(lcs[i - 1][j], lcs[i][j - 1]);
+    }
+  }
+
+  const matchedTarget = new Set<number>();
+  const matchedInput = new Set<number>();
+  let i = targetWords.length;
+  let j = inputWords.length;
+  while (i > 0 && j > 0) {
+    if (targetWords[i - 1] === inputWords[j - 1]) {
+      matchedTarget.add(i - 1);
+      matchedInput.add(j - 1);
+      i--;
+      j--;
+    } else if (lcs[i - 1][j] >= lcs[i][j - 1]) {
+      i--;
+    } else {
+      j--;
+    }
+  }
+
+  const matches = lcs[targetWords.length][inputWords.length];
+  const total = Math.max(targetWords.length, inputWords.length, 1);
+  return {
+    correct: normalize(input) === normalize(target),
+    score: Math.round(matches / total * 100),
+    missing: targetWords.filter((_, wordIndex) => !matchedTarget.has(wordIndex)),
+    extra: inputWords.filter((_, wordIndex) => !matchedInput.has(wordIndex)),
+  };
+}

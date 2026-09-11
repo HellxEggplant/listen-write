@@ -38,6 +38,46 @@
   font-size: 14px;
 }
 
+.answer-correct {
+  border: 1px solid #b9e7cf;
+  background: #effaf4;
+}
+
+.answer-correct strong {
+  color: #137a49;
+}
+
+.answer-incorrect {
+  border: 1px solid #f0d7aa;
+  background: #fff9ee;
+}
+
+.answer-incorrect strong {
+  color: #a65c08;
+}
+
+.answer-feedback {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.answer-feedback span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 9px;
+  border-radius: 7px;
+  background: rgb(255 255 255 / 75%);
+  color: #596981;
+  font-size: 12px;
+}
+
+.answer-feedback b {
+  color: #8c5a18;
+}
+
 .switch-control {
   display: flex;
   align-items: center;
