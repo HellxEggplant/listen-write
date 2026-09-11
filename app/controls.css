@@ -463,11 +463,11 @@
 
 .video-writing-footer > span,
 .video-writing-footer > b {
-  white-space: nowrap;
+  display: none;
 }
 
 .overlay-opacity-slider {
-  width: min(130px, 20vw) !important;
+  display: none !important;
 }
 
 .move-writing-button,
@@ -1058,7 +1058,6 @@
   .move-writing-button::after { content: '下移'; font-size: 11px; }
   .writing-settings-trigger { font-size: 0; }
   .writing-settings-trigger svg { width: 15px; height: 15px; }
-  .overlay-opacity-slider { width: 72px !important; }
   .control-grid { grid-template-columns: 1fr 1fr; padding: 0 16px 18px; }
   .subtitle-mask { left: 2%; width: 96%; }
   .video-stage { aspect-ratio: 16 / 9; }
