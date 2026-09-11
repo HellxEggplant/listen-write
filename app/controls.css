@@ -102,6 +102,46 @@
   font-size: 13px;
 }
 
+.sentence-list-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sentence-list-tools > span {
+  color: #7c89a0;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.language-toggle {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid #dfe6f3;
+  border-radius: 9px;
+  background: #f6f8fc;
+}
+
+.language-toggle button {
+  min-height: 30px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: #66758d;
+  font-size: 12px;
+}
+
+.language-toggle button.active {
+  background: white;
+  color: #305ae8;
+  box-shadow: 0 1px 5px rgb(35 55 95 / 12%);
+}
+
+.translation-status {
+  margin: -5px 0 12px;
+  color: #71809a;
+  font-size: 12px;
+}
+
 .practice-sentence-list {
   max-height: 320px;
   overflow-y: auto;
@@ -110,6 +150,7 @@
 .practice-sentence-list .sentence-item {
   padding: 13px 14px;
   border: 1px solid transparent;
+  cursor: pointer;
 }
 
 .practice-sentence-list .sentence-item.selected {
@@ -118,6 +159,116 @@
 
 .practice-sentence-list .sentence-item strong {
   line-height: 1.55;
+}
+
+.sentence-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.english-sentence,
+.chinese-sentence {
+  display: block;
+}
+
+.chinese-sentence {
+  margin-top: 4px;
+  color: #596981;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.sentence-item.selected .chinese-sentence {
+  color: #4664ac;
+}
+
+.word-token {
+  display: inline;
+  padding: 1px 2px;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: left;
+}
+
+.word-token:hover,
+.word-token:focus-visible {
+  background: #dbe5ff;
+  color: #2449c6;
+}
+
+.word-card {
+  position: fixed;
+  z-index: 80;
+  width: min(320px, calc(100vw - 28px));
+  padding: 16px;
+  transform: translateX(-50%);
+  border: 1px solid #dbe3f3;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 15px 45px rgb(29 43 72 / 22%);
+}
+
+.word-card-close {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  color: #738198;
+  font-size: 20px;
+}
+
+.word-card-close:hover {
+  background: #f0f3f9;
+}
+
+.word-card-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-right: 25px;
+}
+
+.word-card-title strong {
+  color: #1d2a3f;
+  font-size: 20px;
+}
+
+.word-card-title em {
+  color: #8190a7;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.word-card-zh {
+  margin-top: 9px;
+  color: #305ae8;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.word-card-definition,
+.word-card-loading,
+.word-card-error {
+  margin-top: 9px;
+  color: #53647e;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.word-card-error {
+  color: #a65c08;
+}
+
+.word-card small {
+  display: block;
+  margin-top: 11px;
+  color: #919db0;
+  font-size: 10px;
+  line-height: 1.45;
 }
 
 .switch-control {
@@ -753,6 +904,9 @@
   .sentence-quick-status { white-space: normal; }
   .practice-sentence-section { padding: 18px 16px 14px; }
   .practice-sentence-list { max-height: 280px; }
+  .practice-sentence-heading { align-items: flex-start; flex-direction: column; }
+  .sentence-list-tools { width: 100%; justify-content: space-between; }
+  .word-card { top: auto !important; bottom: 14px; left: 50% !important; }
   .sentence-toolbar { align-items: stretch; flex-direction: column; gap: 14px; padding: 16px; }
   .sentence-status { order: 3; text-align: left; }
   .compact-options { flex-wrap: wrap; }
