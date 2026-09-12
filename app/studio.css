@@ -56,6 +56,13 @@ main .practice-top h2 { font-size:17px; line-height:1.5; }
 main .practice-material-status { background:#f3f5f9; border:1px solid #e6ebf2; border-radius:6px; padding:5px 8px; font-size:12px; color:#748197; }
 main .video-stage { grid-column:1; margin:0 22px; aspect-ratio:16/9; border-radius:11px; background:linear-gradient(145deg,#202c40,#101927); box-shadow:inset 0 0 0 1px #ffffff08; }
 main .video-stage video { object-fit:contain; max-height:none; }
+main .audio-cover { position:absolute; z-index:1; inset:0; overflow:hidden; border-radius:inherit; pointer-events:none; background:#071b38; }
+main .audio-cover img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 8s ease,filter .8s ease; }
+main .audio-cover-glow { position:absolute; inset:0; background:radial-gradient(circle at 58% 53%,#6faaff24,transparent 30%); opacity:.35; transition:opacity .8s ease; }
+main .audio-cover.playing img { transform:scale(1.025); filter:saturate(1.08) brightness(1.04); }
+main .audio-cover.playing .audio-cover-glow { opacity:1; animation:audio-cover-breathe 2.8s ease-in-out infinite; }
+@keyframes audio-cover-breathe { 50% { opacity:.5; transform:scale(1.06); } }
+@media(prefers-reduced-motion:reduce) { main .audio-cover img, main .audio-cover-glow { transition:none; animation:none!important; } }
 main .video-empty > svg { color:#a5b7d8; width:34px; height:34px; margin-bottom:18px; }
 main .video-empty h3 { font-size:21px; letter-spacing:.5px; color:#edf2fa; }
 main .video-empty p { font-size:13px; color:#9baac0; }
