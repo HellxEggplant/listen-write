@@ -1,0 +1,27 @@
+{
+  "id": "/listen-write/",
+  "name": "听句 · 英语听写练习室",
+  "short_name": "听句",
+  "description": "导入视频、音频和字幕，在浏览器中逐句练习英语听写。",
+  "start_url": "/listen-write/",
+  "scope": "/listen-write/",
+  "display": "standalone",
+  "background_color": "#f4f7fb",
+  "theme_color": "#305ae8",
+  "orientation": "any",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "/listen-write/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/listen-write/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

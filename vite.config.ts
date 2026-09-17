@@ -34,6 +34,7 @@ const localBindingConfig = {
 };
 
 export default defineConfig(async () => {
+  const isGitHubPages = process.env.GITHUB_PAGES === "true";
   // Use Miniflare's local Request.cf placeholder unless fetching is requested.
   process.env.CLOUDFLARE_CF_FETCH_ENABLED ??= "false";
   process.env.WRANGLER_SEND_METRICS ??= "false";
@@ -45,21 +46,23 @@ export default defineConfig(async () => {
   process.env.WRANGLER_REGISTRY_PATH ??= ".wrangler/dev-registry";
   process.env.MINIFLARE_REGISTRY_PATH ??= ".wrangler/registry";
 
-  // Wrangler snapshots its log path while the Cloudflare plugin is imported.
-  const { cloudflare } = await import("@cloudflare/vite-plugin");
-
-  return {
-    server: isCodexSeatbeltSandbox
-      ? { watch: { useFsEvents: false, usePolling: true } }
-      : undefined,
-    plugins: [
-      vinext(),
-      sites(),
-      cloudflare({
+  // GitHub Pages uses Vinext's static export. The regular build keeps the
+  // Cloudflare adapter and Sites development helpers.
+  const cloudflarePlugin = isGitHubPages
+    ? null
+    : (await import("@cloudflare/vite-plugin")).cloudflare({
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,
         config: localBindingConfig,
-      }),
-    ],
+      });
+
+  return {
+    build: isGitHubPages
+      ? { rolldownOptions: { external: ["cloudflare:workers"] } }
+      : undefined,
+    server: isCodexSeatbeltSandbox
+      ? { watch: { useFsEvents: false, usePolling: true } }
+      : undefined,
+    plugins: [vinext(), ...(isGitHubPages ? [] : [sites()]), ...(cloudflarePlugin ? [cloudflarePlugin] : [])],
   };
 });
