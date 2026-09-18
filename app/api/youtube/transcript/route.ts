@@ -54,7 +54,7 @@ function segmentYouTubeChunks(chunks: YouTubeChunk[]) {
   let group: YouTubeChunk[] = [];
   const flush = () => {
     if (!group.length) return;
-    result.push(...mergeTranscriptChunks(group, 11, 1.1, 22));
+    result.push(...mergeTranscriptChunks(group, 11, 1.1, 22).map(({ start, end, text }) => ({ start, end, text })));
     group = [];
   };
   for (const chunk of chunks) {
