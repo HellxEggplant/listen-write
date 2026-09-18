@@ -1,6 +1,9 @@
 export type Sentence = { start: number; end: number; text: string };
 export type TimedTranscriptChunk = Sentence;
-const endsSentence = (text: string) => /[.!?]["”')\]]*$/.test(text.trim());
+const endsSentence = (text: string) => {
+  const value = text.trim().replace(/["”')\]]+$/, '');
+  return /[!?]$/.test(value) || /(?:^|[^.])\.$/.test(value);
+};
 
 function splitTimedChunk(chunk: TimedTranscriptChunk): TimedTranscriptChunk[] {
   const parts = chunk.text.match(/[^.!?]+(?:[.!?]+["”')\]]*)?|[.!?]+/g)?.map(part => part.trim()).filter(Boolean) || [];
@@ -16,7 +19,7 @@ function splitTimedChunk(chunk: TimedTranscriptChunk): TimedTranscriptChunk[] {
   });
 }
 
-export function mergeTranscriptChunks(chunks: TimedTranscriptChunk[], maxDuration = 15): Sentence[] {
+export function mergeTranscriptChunks(chunks: TimedTranscriptChunk[], maxDuration = 15, maxGap = 1.5, maxWords = 30): Sentence[] {
   const pieces = chunks
     .filter(chunk => chunk.text.trim() && Number.isFinite(chunk.start) && Number.isFinite(chunk.end) && chunk.end > chunk.start)
     .sort((a, b) => a.start - b.start)
@@ -30,7 +33,9 @@ export function mergeTranscriptChunks(chunks: TimedTranscriptChunk[], maxDuratio
   };
   for (const piece of pieces) {
     const gap = current ? piece.start - current.end : 0;
-    if (current && (gap > 1.5 || current.end - current.start >= maxDuration)) flush();
+    const nextDuration = current ? piece.end - current.start : piece.end - piece.start;
+    const nextWords = current ? `${current.text} ${piece.text}`.trim().split(/\s+/).length : piece.text.trim().split(/\s+/).length;
+    if (current && (gap > maxGap || nextDuration > maxDuration || nextWords > maxWords)) flush();
     current = current
       ? { start: current.start, end: Math.max(current.end, piece.end), text: `${current.text} ${piece.text}` }
       : { ...piece };

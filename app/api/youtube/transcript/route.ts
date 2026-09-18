@@ -7,6 +7,7 @@ type CaptionTrack = {
   kind?: string;
   name?: { simpleText?: string; runs?: Array<{ text?: string }> };
 };
+type YouTubeChunk = { start: number; end: number; text: string; breakAfter: boolean };
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -25,25 +26,43 @@ function decodeXml(value: string) {
 }
 
 function parseTimedText(xml: string) {
-  const chunks: Array<{ start: number; end: number; text: string }> = [];
+  const chunks: YouTubeChunk[] = [];
   const paragraph = /<p\b[^>]*\bt="(\d+)"[^>]*\bd="(\d+)"[^>]*>([\s\S]*?)<\/p>/g;
   for (const match of xml.matchAll(paragraph)) {
     const start = Number(match[1]) / 1000;
     const duration = Number(match[2]) / 1000;
-    const text = decodeXml(match[3].replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
-    const spoken = /[a-z]/i.test(text) && !/^\s*[[(].*(?:music|applause|laughter|cheering|♪).*[)\]]\s*$/i.test(text);
-    if (spoken && duration > 0) chunks.push({ start, end: start + duration, text });
+    const rawText = decodeXml(match[3].replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
+    const text = rawText.replace(/[♪♫]+/g, '').replace(/\s+/g, ' ').trim();
+    const spoken = /[a-z]/i.test(text) && !/^\s*[[(].*[)\]]\s*$/i.test(text);
+    if (spoken && duration > 0) chunks.push({ start, end: start + duration, text, breakAfter: /[♪♫]/.test(rawText) });
   }
   if (chunks.length) return chunks;
   const classic = /<text\b[^>]*\bstart="([\d.]+)"[^>]*\bdur="([\d.]+)"[^>]*>([\s\S]*?)<\/text>/g;
   for (const match of xml.matchAll(classic)) {
     const start = Number(match[1]);
     const duration = Number(match[2]);
-    const text = decodeXml(match[3].replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
-    const spoken = /[a-z]/i.test(text) && !/^\s*[[(].*(?:music|applause|laughter|cheering|♪).*[)\]]\s*$/i.test(text);
-    if (spoken && duration > 0) chunks.push({ start, end: start + duration, text });
+    const rawText = decodeXml(match[3].replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
+    const text = rawText.replace(/[♪♫]+/g, '').replace(/\s+/g, ' ').trim();
+    const spoken = /[a-z]/i.test(text) && !/^\s*[[(].*[)\]]\s*$/i.test(text);
+    if (spoken && duration > 0) chunks.push({ start, end: start + duration, text, breakAfter: /[♪♫]/.test(rawText) });
   }
   return chunks;
+}
+
+function segmentYouTubeChunks(chunks: YouTubeChunk[]) {
+  const result = [] as ReturnType<typeof mergeTranscriptChunks>;
+  let group: YouTubeChunk[] = [];
+  const flush = () => {
+    if (!group.length) return;
+    result.push(...mergeTranscriptChunks(group, 11, 1.1, 22));
+    group = [];
+  };
+  for (const chunk of chunks) {
+    group.push(chunk);
+    if (chunk.breakAfter) flush();
+  }
+  flush();
+  return result;
 }
 
 export async function GET(request: NextRequest) {
@@ -82,7 +101,7 @@ export async function GET(request: NextRequest) {
     const xml = await captionResponse.text();
     const chunks = parseTimedText(xml);
     if (!chunks.length) throw new Error('YouTube 没有返回可读取的英文字幕。');
-    const sentences = mergeTranscriptChunks(chunks);
+    const sentences = segmentYouTubeChunks(chunks);
     const label = track.name?.simpleText || track.name?.runs?.map(item => item.text || '').join('') || 'English';
     return NextResponse.json({
       id,

@@ -14,6 +14,7 @@ type YouTubePlayerInstance = {
   seekTo(seconds: number, allowSeekAhead: boolean): void;
   setPlaybackRate(rate: number): void;
   setVolume(volume: number): void;
+  unloadModule?(module: string): void;
   unMute(): void;
 };
 
@@ -105,9 +106,9 @@ export const YouTubePlayer = forwardRef<YouTubePlayerHandle, Props>(function You
         playerVars: {
           autoplay: 0,
           cc_load_policy: 0,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
+          controls: 1,
+          disablekb: 0,
+          fs: 1,
           iv_load_policy: 3,
           modestbranding: 1,
           playsinline: 1,
@@ -118,6 +119,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerHandle, Props>(function You
             if (!player.current) return;
             player.current.setVolume(Math.round(latest.current.volume * 100));
             player.current.setPlaybackRate(latest.current.rate);
+            player.current.unloadModule?.('captions');
             if (latest.current.muted) player.current.mute();
             latest.current.onReady(player.current.getDuration() || 0);
             poll = setInterval(() => {
@@ -129,6 +131,7 @@ export const YouTubePlayer = forwardRef<YouTubePlayerHandle, Props>(function You
               );
             }, 150);
           },
+          onStateChange: () => player.current?.unloadModule?.('captions'),
           onError: () => latest.current.onError(),
         },
       });
